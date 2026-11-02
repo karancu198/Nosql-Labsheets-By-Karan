@@ -1,0 +1,39 @@
+# Create table
+create 'Students', 'Personal', 'Academic'
+
+# Insert 5 records
+put 'Students', '101', 'Personal:Name', 'Amit'
+put 'Students', '101', 'Academic:Course', 'BCA'
+put 'Students', '101', 'Academic:Marks', '85'
+
+put 'Students', '102', 'Personal:Name', 'Rahul'
+put 'Students', '102', 'Academic:Course', 'BBA'
+put 'Students', '102', 'Academic:Marks', '78'
+
+put 'Students', '103', 'Personal:Name', 'Priya'
+put 'Students', '103', 'Academic:Course', 'BCA'
+put 'Students', '103', 'Academic:Marks', '92'
+
+put 'Students', '104', 'Personal:Name', 'Neha'
+put 'Students', '104', 'Academic:Course', 'BCA'
+put 'Students', '104', 'Academic:Marks', '88'
+
+put 'Students', '105', 'Personal:Name', 'Karan'
+put 'Students', '105', 'Academic:Course', 'BBA'
+put 'Students', '105', 'Academic:Marks', '75'
+
+# Retrieve one record
+get 'Students', '101'
+
+# Update marks
+put 'Students', '101', 'Academic:Marks', '95'
+
+# Scan table
+scan 'Students'
+
+# Delete marks column
+delete 'Students', '101', 'Academic:Marks'
+
+# Delete table
+disable 'Students'
+drop 'Students'
