@@ -1,0 +1,20 @@
+MongoDB:
+- Model: Document
+- Storage: BSON documents
+- Query: MongoDB Query Language
+- Scalability: Horizontal scaling
+- Uses: E-commerce, CMS
+
+Cassandra:
+- Model: Wide-column
+- Storage: Rows and columns
+- Query: CQL
+- Scalability: Horizontal scaling
+- Uses: IoT, large-scale data
+
+Neo4j:
+- Model: Graph
+- Storage: Nodes and relationships
+- Query: Cypher
+- Scalability: Graph clustering options
+- Uses: Social networks, recommendation systems
