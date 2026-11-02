@@ -1,0 +1,27 @@
+create 'CMSApp', 'content', 'author', 'metadata'
+
+put 'CMSApp', '1', 'content:title', 'MongoDB Tutorial'
+put 'CMSApp', '1', 'content:body', 'Introduction to MongoDB'
+put 'CMSApp', '1', 'author:name', 'Amit'
+put 'CMSApp', '1', 'metadata:status', 'Published'
+
+put 'CMSApp', '2', 'content:title', 'Python Tutorial'
+put 'CMSApp', '2', 'content:body', 'Python Basics'
+put 'CMSApp', '2', 'author:name', 'Riya'
+put 'CMSApp', '2', 'metadata:status', 'Draft'
+
+put 'CMSApp', '3', 'content:title', 'Java Tutorial'
+put 'CMSApp', '3', 'author:name', 'Rahul'
+put 'CMSApp', '3', 'metadata:status', 'Published'
+
+get 'CMSApp', '1'
+
+scan 'CMSApp'
+
+put 'CMSApp', '1', 'metadata:status', 'Updated'
+
+delete 'CMSApp', '2', 'content:title'
+
+scan 'CMSApp'
+
+describe 'CMSApp'
