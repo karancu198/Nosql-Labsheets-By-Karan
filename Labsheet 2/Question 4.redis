@@ -1,0 +1,18 @@
+SET student:1 "Amit"
+SET student:2 "Rahul"
+SET student:3 "Priya"
+SET student:4 "Neha"
+SET student:5 "Karan"
+
+# Retrieve
+GET student:1
+GET student:2
+
+# Update
+SET student:1 "Amit Kumar"
+
+# Delete
+DEL student:5
+
+# List keys
+KEYS student:*
