@@ -1,0 +1,34 @@
+1. Single Server:
+   Architecture: One database server.
+   Distribution: Data stored on one server.
+   Failure: Server failure stops service.
+   Advantage: Easy to manage.
+   Limitation: Limited scalability.
+
+2. Sharding:
+   Architecture: Multiple database shards.
+   Distribution: Data divided across servers.
+   Failure: Depends on shard availability.
+   Advantage: Horizontal scalability.
+   Limitation: Complex management.
+
+3. Master-Slave Replication:
+   Architecture: Primary and secondary nodes.
+   Distribution: Data copied to secondary nodes.
+   Failure: Secondary can be promoted if configured.
+   Advantage: Data redundancy.
+   Limitation: Primary handles writes.
+
+4. Peer-to-Peer:
+   Architecture: Multiple equal nodes.
+   Distribution: Data replicated across nodes.
+   Failure: Other nodes can continue serving requests.
+   Advantage: High availability.
+   Limitation: Consistency management.
+
+5. Sharding + Replication:
+   Architecture: Multiple replicated shards.
+   Distribution: Data partitioned and replicated.
+   Failure: Replicas can provide availability.
+   Advantage: Scalability and fault tolerance.
+   Limitation: Complex configuration.
