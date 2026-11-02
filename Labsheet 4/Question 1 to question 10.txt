@@ -1,0 +1,194 @@
+// ==========================================
+// LAB SHEET 4 - Q1 TO Q10
+// APACHE HBASE
+// ==========================================
+
+
+// Q1. STUDENT TABLE
+
+create 'Student', 'personal', 'academic'
+
+put 'Student', '1', 'personal:name', 'Amit'
+put 'Student', '1', 'personal:city', 'Delhi'
+put 'Student', '1', 'academic:course', 'BCA'
+put 'Student', '1', 'academic:marks', '85'
+
+put 'Student', '2', 'personal:name', 'Riya'
+put 'Student', '2', 'academic:course', 'BCA'
+
+put 'Student', '3', 'personal:name', 'Rahul'
+put 'Student', '3', 'academic:course', 'MCA'
+
+put 'Student', '4', 'personal:name', 'Neha'
+put 'Student', '4', 'academic:course', 'BCA'
+
+put 'Student', '5', 'personal:name', 'Karan'
+put 'Student', '5', 'academic:course', 'MCA'
+
+scan 'Student'
+
+
+// Q2. EMPLOYEE CRUD OPERATIONS
+
+create 'Employee', 'details'
+
+put 'Employee', '101', 'details:name', 'Amit'
+put 'Employee', '101', 'details:salary', '30000'
+
+get 'Employee', '101'
+
+put 'Employee', '101', 'details:salary', '40000'
+
+scan 'Employee'
+
+delete 'Employee', '101', 'details:name'
+
+deleteall 'Employee', '101'
+
+disable 'Employee'
+drop 'Employee'
+
+
+// Q3. EVENT LOGGING SYSTEM
+
+create 'Events', 'info', 'user'
+
+put 'Events', 'E101', 'info:timestamp', '10:00'
+put 'Events', 'E101', 'info:type', 'login'
+put 'Events', 'E101', 'user:name', 'Amit'
+
+put 'Events', 'E102', 'info:timestamp', '11:00'
+put 'Events', 'E102', 'info:type', 'logout'
+put 'Events', 'E102', 'user:name', 'Riya'
+
+put 'Events', 'E103', 'info:type', 'upload'
+put 'Events', 'E103', 'user:name', 'Amit'
+
+get 'Events', 'E101'
+get 'Events', 'E102'
+
+scan 'Events'
+
+
+// Q4. CONTENT MANAGEMENT SYSTEM
+
+create 'CMS', 'content', 'author', 'metadata'
+
+put 'CMS', '1', 'content:title', 'MongoDB Tutorial'
+put 'CMS', '1', 'content:body', 'Database Article'
+put 'CMS', '1', 'author:name', 'Amit'
+put 'CMS', '1', 'metadata:status', 'Published'
+
+put 'CMS', '2', 'content:title', 'Python Guide'
+put 'CMS', '2', 'author:name', 'Riya'
+put 'CMS', '2', 'metadata:status', 'Draft'
+
+get 'CMS', '1'
+
+put 'CMS', '1', 'metadata:status', 'Updated'
+
+scan 'CMS'
+
+deleteall 'CMS', '2'
+
+
+// Q5. BLOGGING PLATFORM
+
+create 'Blog', 'details', 'author', 'comments'
+
+put 'Blog', 'B1', 'details:title', 'HBase Tutorial'
+put 'Blog', 'B1', 'author:name', 'Amit'
+put 'Blog', 'B1', 'comments:c1', 'Very Good'
+
+put 'Blog', 'B2', 'details:title', 'MongoDB Guide'
+put 'Blog', 'B2', 'author:name', 'Riya'
+
+put 'Blog', 'B3', 'details:title', 'Python Basics'
+put 'Blog', 'B3', 'author:name', 'Rahul'
+
+get 'Blog', 'B1'
+
+scan 'Blog'
+
+
+// Q6. COLUMN FAMILY DATA MODEL
+
+create 'College', 'personal', 'academic'
+
+put 'College', '1', 'personal:name', 'Amit'
+put 'College', '1', 'personal:city', 'Delhi'
+put 'College', '1', 'academic:course', 'BCA'
+put 'College', '1', 'academic:marks', '85'
+
+put 'College', '2', 'personal:name', 'Riya'
+put 'College', '2', 'academic:course', 'MCA'
+
+scan 'College'
+
+describe 'College'
+
+
+// Q7. WEBSITE COUNTER
+
+create 'WebsiteCounter', 'count'
+
+put 'WebsiteCounter', 'Home', 'count:views', '0'
+put 'WebsiteCounter', 'About', 'count:views', '0'
+
+incr 'WebsiteCounter', 'Home', 'count:views'
+incr 'WebsiteCounter', 'Home', 'count:views'
+incr 'WebsiteCounter', 'About', 'count:views'
+
+get 'WebsiteCounter', 'Home'
+get 'WebsiteCounter', 'About'
+
+scan 'WebsiteCounter'
+
+
+// Q8. EXPIRING USER SESSIONS
+
+create 'Sessions', {NAME=>'session', TTL=>60}
+
+put 'Sessions', 'S1', 'session:user', 'Amit'
+put 'Sessions', 'S1', 'session:status', 'Active'
+
+put 'Sessions', 'S2', 'session:user', 'Riya'
+put 'Sessions', 'S2', 'session:status', 'Active'
+
+scan 'Sessions'
+
+get 'Sessions', 'S1'
+
+
+// Q9. LARGE-SCALE APPLICATION
+
+create 'LargeData', 'details'
+
+put 'LargeData', 'user_001', 'details:name', 'Amit'
+put 'LargeData', 'user_002', 'details:name', 'Riya'
+put 'LargeData', 'user_003', 'details:name', 'Rahul'
+put 'LargeData', 'user_004', 'details:name', 'Neha'
+put 'LargeData', 'user_005', 'details:name', 'Karan'
+
+scan 'LargeData'
+
+get 'LargeData', 'user_001'
+
+
+// Q10. MULTIPLE REGIONS IN HBASE
+
+create 'RegionTable', 'data',
+SPLITS => ['m', 't']
+
+put 'RegionTable', 'a1', 'data:name', 'Amit'
+put 'RegionTable', 'n1', 'data:name', 'Riya'
+put 'RegionTable', 'z1', 'data:name', 'Rahul'
+
+scan 'RegionTable'
+
+describe 'RegionTable'
+
+
+// ==========================================
+//  LAB SHEET 4 - Q1 TO Q10
+// ==========================================
