@@ -1,0 +1,145 @@
+// ==========================================
+// NO SQL DATABASE DESIGN - LAB SHEET 5
+// QUESTION 11 TO QUESTION 15
+// TECHNOLOGY: NEO4J
+// ==========================================
+
+
+// Q11. STUDENT, COURSE AND DEPARTMENT GRAPH
+
+CREATE (s1:Student {name:'Amit', roll:1})
+CREATE (s2:Student {name:'Riya', roll:2})
+CREATE (c1:Course {name:'BCA'})
+CREATE (c2:Course {name:'MCA'})
+CREATE (d:Department {name:'Computer Science'})
+
+CREATE (s1)-[:ENROLLED_IN]->(c1)
+CREATE (s2)-[:ENROLLED_IN]->(c2)
+CREATE (c1)-[:BELONGS_TO]->(d)
+CREATE (c2)-[:BELONGS_TO]->(d)
+
+MATCH (s:Student)-[:ENROLLED_IN]->(c:Course)
+RETURN s,c;
+
+MATCH (c:Course)-[:BELONGS_TO]->(d:Department)
+RETURN c,d;
+
+
+// Q12. SOCIAL NETWORK GRAPH
+
+CREATE (a:Person {name:'Amit'})
+CREATE (b:Person {name:'Riya'})
+CREATE (c:Person {name:'Rahul'})
+
+CREATE (a)-[:FRIENDS_WITH]->(b)
+CREATE (a)-[:FOLLOWS]->(c)
+CREATE (b)-[:WORKS_AT]->(:Company {name:'ABC Ltd'})
+
+// Find friends
+MATCH (p:Person {name:'Amit'})-[:FRIENDS_WITH]->(f:Person)
+RETURN f;
+
+// Find followers
+MATCH (p:Person {name:'Amit'})-[:FOLLOWS]->(f:Person)
+RETURN f;
+
+// Find workplace
+MATCH (p:Person)-[:WORKS_AT]->(c:Company)
+RETURN p,c;
+
+
+// Q13. SHOPPING / E-COMMERCE GRAPH
+
+CREATE (c:Customer {name:'Amit'})
+CREATE (p1:Product {name:'Laptop',price:50000})
+CREATE (p2:Product {name:'Mouse',price:500})
+CREATE (cat:Category {name:'Electronics'})
+CREATE (o:Order {orderId:101})
+
+CREATE (c)-[:PLACED]->(o)
+CREATE (o)-[:CONTAINS]->(p1)
+CREATE (o)-[:CONTAINS]->(p2)
+CREATE (p1)-[:BELONGS_TO]->(cat)
+CREATE (p2)-[:BELONGS_TO]->(cat)
+
+// Find products purchased by Amit
+MATCH (c:Customer {name:'Amit'})-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)
+RETURN c,o,p;
+
+// Find products by category
+MATCH (p:Product)-[:BELONGS_TO]->(cat:Category)
+RETURN p,cat;
+
+
+// Q14. TRANSACTIONS, CONSISTENCY AND AVAILABILITY
+
+// Create records
+CREATE (a:Person {name:'Amit',age:21});
+CREATE (b:Person {name:'Riya',age:22});
+
+// Retrieve records
+MATCH (p:Person)
+RETURN p;
+
+// Update record
+MATCH (p:Person {name:'Amit'})
+SET p.age=23
+RETURN p;
+
+// Create relationship
+MATCH (a:Person {name:'Amit'})
+MATCH (b:Person {name:'Riya'})
+CREATE (a)-[:FRIENDS_WITH]->(b);
+
+// Delete relationship
+MATCH (a:Person {name:'Amit'})-[r:FRIENDS_WITH]->(b:Person {name:'Riya'})
+DELETE r;
+
+// Delete node
+MATCH (p:Person {name:'Riya'})
+DETACH DELETE p;
+
+// Display remaining records
+MATCH (p:Person)
+RETURN p;
+
+
+// Q15. GRAPH DATABASE APPLICATION
+
+// Create nodes
+CREATE (a:Person {id:1,name:'Amit',city:'Delhi'})
+CREATE (b:Person {id:2,name:'Riya',city:'Mumbai'})
+CREATE (c:Person {id:3,name:'Rahul',city:'Delhi'})
+
+// Create relationships
+CREATE (a)-[:FRIENDS_WITH]->(b)
+CREATE (a)-[:FRIENDS_WITH]->(c)
+
+// Retrieve records
+MATCH (p:Person)
+RETURN p;
+
+// Find friends
+MATCH (p:Person {name:'Amit'})-[:FRIENDS_WITH]->(f:Person)
+RETURN f;
+
+// Update record
+MATCH (p:Person {name:'Amit'})
+SET p.city='Noida';
+
+// Delete relationship
+MATCH (a:Person {name:'Amit'})-[r:FRIENDS_WITH]->(b:Person {name:'Riya'})
+DELETE r;
+
+// Delete node
+MATCH (p:Person {name:'Rahul'})
+DETACH DELETE p;
+
+// Display final graph
+MATCH (n)
+RETURN n;
+
+
+// ==========================================
+// END OF LAB SHEET 5 - Q11 TO Q15
+// ==========================================
